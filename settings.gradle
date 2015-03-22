@@ -1,0 +1,3 @@
+include 'core-layer', 'service-layer', 'web-frontend'
+
+rootProject.name = 'build-pipeline'

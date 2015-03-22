@@ -1,0 +1,58 @@
+def langLevel = 1.8
+ 
+allprojects {
+ 
+    apply plugin: 'idea'
+ 
+    group = 'com.theapsgroup'
+    version = '0.1'
+}
+ 
+subprojects {
+ 
+    apply plugin: 'groovy'
+ 
+    sourceCompatibility = langLevel
+    targetCompatibility = langLevel
+ 
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+ 
+    dependencies {
+        compile 'org.codehaus.groovy:groovy-all:2.4.1'
+        testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    }
+}
+ 
+project(':core-layer') {
+ 
+//    dependencies {
+//        compile 'org.hibernate:hibernate-core:4.1.7.Final'
+//    }
+}
+ 
+project(':service-layer') {
+ 
+    dependencies {
+        compile project(':core-layer')
+    }
+}
+ 
+project(':web-frontend') {
+ 
+//    apply plugin: 'war'
+ 
+    dependencies {
+        compile project(':service-layer')
+//        compile 'org.springframework:spring-webmvc:3.1.2.RELEASE'
+    }
+}
+ 
+idea {
+    project {
+        jdkName = langLevel
+        languageLevel = langLevel
+    }
+}
